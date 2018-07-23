@@ -159,9 +159,56 @@ describe('Blog posts API resource', function() {
             .post('/posts')
             .send(newPost)
             .then(function(res) {
-                
-            })
-        })
-    })
+                expect(res).to.have.status(201);
+                expect(res).to.be.json;
+                expect(res.body).to.be.a('object');
+                expect(res.body).to.include.keys('id', 'title', 'content', 'author', 'created');
+                expect(res.body.title).to.equal(newPost.title);
+                expect(res.body.id).to.not.be.null;
+                expect(res.body.content).to.equal(newPost.content);
+                expect(res.body.author).to.equal(`${newPost.author.firstName} ${newPost.author.lastName}`);
 
+                return BlogPost.findById(res.body.id);
+            })
+            .then(function(post)    {
+                expect(post.title).to.equal(newPost.title);
+                expect(post.content).to.equal(newPost.content);
+                expect(post.author.firstName).to.equal(newPost.author.firstName);
+                expect(post.author.lastName).to.equal(newPost.author.lastName);
+            });
+        });
+    });
+
+
+    describe('PUT endpoint', function () {
+        const updateData = {
+            title: 'shrimp shrimp shrimp',
+                author: {
+                    firstName: 'arnold',
+                    lastName:  'palmer'
+                },
+                content: 'ham, ham, ham'
+        };
+
+        return BlogPost
+        .findOne()
+        .then(function(post) {
+            updateData.id = post.id;
+
+            return chai.request(app)
+            .put(`/posts/${post.id}`)
+            .send(updateData);
+        })
+        .then(function(res) {
+            expect(res).to.have.status(204);
+
+            return BlogPost.findById(updateData.id);
+        })
+        .then(function(post) {
+            expect(post.title).to.equal(updateData.title);
+            expect(post.content).to.equal(updateData.content);
+            expect(post.author.firstName).to.equal(updateData.author.firstName);
+            expect(post.author.lastName).to.equal(updateData.author.lastName);
+        });
+    });
 });
