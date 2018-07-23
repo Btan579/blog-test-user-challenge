@@ -153,7 +153,14 @@ describe('Blog posts API resource', function() {
                         lastName: faker.name.lastName()
                 },
                 content: faker.lorem.text()
-            }
+            };
+
+            return chai.request(app)
+            .post('/posts')
+            .send(newPost)
+            .then(function(res) {
+                
+            })
         })
     })
 
