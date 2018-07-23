@@ -181,6 +181,7 @@ describe('Blog posts API resource', function() {
 
 
     describe('PUT endpoint', function () {
+        it('should update fields you send over', function() {
         const updateData = {
             title: 'shrimp shrimp shrimp',
                 author: {
@@ -209,6 +210,27 @@ describe('Blog posts API resource', function() {
             expect(post.content).to.equal(updateData.content);
             expect(post.author.firstName).to.equal(updateData.author.firstName);
             expect(post.author.lastName).to.equal(updateData.author.lastName);
+        });
+    });
+});
+
+    describe('DELETE endpoint', function() {
+        it('delete a post by id', function() {
+            let post;
+
+            return BlogPost
+            .findOne()
+            .then(function(_post) {
+                post = _post;
+                return chai.request(app).delete(`/posts/${post.id}`);
+            })
+            .then(function(res) {
+                expect(res).to.have.status(204);
+                return BlogPost.findById(post.id);
+            })
+            .then(function(_post) {
+                expect(_post).to.be.null;
+            });
         });
     });
 });
