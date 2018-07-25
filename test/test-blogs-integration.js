@@ -39,45 +39,6 @@ function seedBlogData() {
 }
 
 
-// function generatePostTitle() {
-//     const titles = [
-//         'Pork', 'Chicken', 'Beef', 'Fish', 'Lamb', 'Tofu', 'Seitan', 'Dairy', 'Vegtables', 'Shellfish'];
-//     return titles[Math.floor(Math.random() * titles.length)];
-// }
-
-// function generatePostContent() {
-//     const testText = 
-
-//     return testText[Math.floor(Math.random() * testText.length)];
-// }
-
-// function generateAuthor () {
-//     // const firstNameF = ['John', 'Jill', 'Jack', 'Ashley', 'Amanda'];
-//     // const lastNameF = ['Smith', 'Stein', 'Oconner', 'Rogers', 'Obrien'];
-//     // const namesF = ['John Smith', 'Jill Stein', 'Jack Oconner', 'Ashley Rogers', 'Amanda Obrien'];
-//     // const authorF = namesF[Math.floor(Math.random() * namesF.length)];
-//     // const firstNameF = faker.name.firstName();
-//     // const lastnameF = faker.name.lastName();
-//     const authorF = faker.name.findName();
-//     return {
-//         authorF
-//     };
-// }
-
-
-
-// function generateBlogPostData() {
-//     return {
-//         author: { 
-//             firstName: faker.name.firstName(), 
-//             lastName: faker.name.lastName()
-//             },
-//         title: faker.lorem.sentence(),
-//         content: faker.lorem.text()
-
-//     };
-// }
-
 
 function tearDownDb() {
     console.warn('Deleting database');
@@ -110,7 +71,7 @@ describe('Blog posts API resource', function() {
             .then(function(_res)    {
                 res = _res;
                 expect(res).to.have.status(200);
-                expect(res.body.posts).to.have.lengthOf.at.least(1);
+                expect(res.body.posts).to.have.lengthOf.least(1);
                 return BlogPost.count();
             })
             .then(function(count) {
