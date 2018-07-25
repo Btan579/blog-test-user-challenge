@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: mbh5HXRfGa22nDtCSV1k55S13Yv5ubchZIinmKJmfJIIQY5xchI7pTiJkxIS47wEhBmdhcorxwyaA7Nz84Nb4NS11loVI1cOGfJfz+mXZTRzeidGzP4gtPBX3MH5mzFr4yX9ZldWpeR+ucCehotYCCsFGfwn4ZdlFVZJpn87y/9MMaOb8AarDTjxEaqBH0C6tCjn0iVSE7WVoZpY6FE/aqe8N9eR4TBaW9LzyQiiT6W1cjcTDJ7YMC6DXCxKq5fXRDkY76SlHlpwCRYzEn/9Bg2RTiIuLMMB0JIIVc1V00IAxnCcWKLKZW2Kvi3BUSNeiq0A057/YmPAlvV5078OL/kvnOt+Djg/2lDJncOzhFw2U6WK66bHPQIy/vZlgm0yopKOtLC9b76K4Q8GIrV6/2vV+2B9rewfNbdkaQpPA18nH1ET+cYUSqC1lTqxJlKhmqq0Ba1iMDZytvtobRvt5wqN8d3E5QweEYHrj9kAx5SGqGUMvhysvjxmXuQkaQZp2lgtz+etq7pg/ApAgKHJa+xkvUeL+IsLL4CVP9IV70u9PeLSxVbSL/OvMe4+Jt9H9wr3ru7SdxJjofOERVd+y3ZwQNwr78J8xknZkMN2Zq+GWmcvbmExoLi+Lozz39ru43dTuZ7hvH/wWNtActvAa9fGQuCo2DjOVqGoADK58+g=
+  app: infinite-cove-19622
+  on:
+    repo: Btan579/blog-test-user-challenge
